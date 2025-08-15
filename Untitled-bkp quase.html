@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title> Rota Caiçara de Cicloturismo</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', 'Open Sans', sans-serif;
+      background-image: url('imagens/Fundo.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      color: #2f4f2f;
+    }
+
+    header {
+      background-color: #0047AB;
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    .logo-container img {
+      width: 160px;
+      height: auto;
+      display: block;
+      margin: 0 auto 1rem;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-family: 'Merriweather', serif;
+    }
+
+    .tagline {
+      font-style: italic;
+      color: #e0f0ff;
+      font-size: 1rem;
+    }
+
+    section:not(.scroll-section) {
+      max-width: 1100px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 8px;
+    }
+
+    section h2 {
+      font-size: 2rem;
+      font-family: 'Merriweather', serif;
+      color: #0047AB;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    section p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      text-align: justify;
+      color: #333;
+    }
+
+    .scroll-section {
+      max-width: 1100px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 8px;
+    }
+
+    .scroll-section h2 {
+      text-align: center;
+      font-size: 1.8rem;
+      color: #0047AB;
+      margin-bottom: 1rem;
+    }
+
+    .card-row {
+      display: flex;
+      overflow-x: auto;
+      gap: 1rem;
+      padding-bottom: 1rem;
+      scrollbar-width: auto;
+      scrollbar-color: #0047AB #ccc;
+    }
+
+    .card-row::-webkit-scrollbar {
+      height: 10px;
+    }
+
+    .card-row::-webkit-scrollbar-track {
+      background: #ddd;
+      border-radius: 10px;
+    }
+
+    .card-row::-webkit-scrollbar-thumb {
+      background-color: #0047AB;
+      border-radius: 10px;
+    }
+
+    .card {
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      flex: 0 0 260px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+    }
+
+    .card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+
+    .card h3 {
+      font-size: 1.2rem;
+      text-align: center;
+      padding: 0.5rem;
+      color: #1b3d1b;
+    }
+
+    .card button {
+      margin: 0.5rem 1rem 1rem;
+      padding: 0.5rem;
+      background-color: #2a5d34;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .card button:hover {
+      background-color: #1e4726;
+    }
+
+    dialog {
+      border: none;
+      border-radius: 8px;
+      padding: 1.5rem;
+      max-width: 500px;
+      width: 90%;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      position: relative;
+    }
+
+    dialog img {
+      width: 100%;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+    }
+
+    dialog .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      background: transparent;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #555;
+    }
+
+    .visit-form label {
+      display: block;
+      margin: 15px 0 5px;
+      font-weight: bold;
+    }
+
+    .visit-form input,
+    .visit-form textarea {
+      width: 100%;
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+
+    .visit-form button {
+      padding: 0.8rem 1.6rem;
+      background: #2a5d34;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      margin-top: 1rem;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .visit-form button:hover {
+      background: #1e4726;
+    }
+
+    footer {
+      background-color: #0047AB;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo-container">
+    <img src="imagens/logo.png" alt="Logo Museu Virtual" />
+  </div>
+  <h1>Rota Caiçara de Cicloturismo</h1>
+  <p class="tagline">Pedale pela cultura e natureza do litoral paranaense com propósito.</p>
+</header>
+
+<section>
+  <h2>Quem Somos e Nosso Propósito</h2>
+  <p>A Rota Caiçara de Cicloturismo é um circuito de aproximadamente 430 km no litoral do Paraná, idealizado pela Universidade Federal do Paraná (UFPR) por meio do Programa Ciclovida. Com foco no cicloturismo de base comunitária, a rota promove a valorização da cultura local, a preservação ambiental e o fortalecimento do turismo sustentável.</p>
+</section>
+
+<section class="scroll-section">
+  <h2>Cidades da Rota</h2>
+  <div class="card-row">
+    <!-- Card exemplo -->
+    <div class="card">
+      <img src="imagens/Morretes.png" alt="Morretes">
+      <h3>Morretes</h3>
+      <button class="openModal" data-target="modalMorretes">Saiba mais</button>
+    </div>
+    <!-- Adicione mais cards conforme necessário -->
+  </div>
+</section>
+
+<section class="scroll-section">
+  <h2>Pontos Turísticos</h2>
+  <div class="card-row">
+    <div class="card">
+      <img src="imagens/SaltoMorato.jpg" alt="Salto Morato">
+      <h3>Salto Morato</h3>
+      <button class="openModal" data-target="modalSalto">Saiba mais</button>
+    </div>
+    <!-- Adicione mais pontos turísticos -->
+  </div>
+</section>
+
+<section>
+  <h2>Deixe sua mensagem no Livro de Visitas</h2>
+  <form class="visit-form">
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" name="nome" required>
+    <label for="email">E-mail:</label>
+    <input type="email" id="email" name="email" required>
+    <label for="mensagem">Mensagem:</label>
+    <textarea id="mensagem" name="mensagem" rows="4" required></textarea>
+    <button type="submit">Enviar</button>
+  </form>
+</section>
+
+<footer>
+  <p>&copy; 2025 Museu Virtual</p>
+</footer>
+
+<script>
+  document.querySelectorAll('.openModal').forEach(btn => {
+    const modal = document.getElementById(btn.dataset.target);
+    if (!modal) return;
+    modal.showModal();
+    const close = modal.querySelector('.close');
+    close.addEventListener('click', () => modal.close());
+    modal.addEventListener('click', e

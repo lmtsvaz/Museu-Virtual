@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title></title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header>
+    <img src="imagens/logo.png" alt="Logo Museu Virtual" />
+    <h1>Rota Caiçara de Cicloturismo</h1>
+    <p class="tagline">Pedale pela cultura e natureza do litoral paranaense com propósito.</p>
+  </header>
+
+  <section>
+    <h2>Quem Somos e Nosso Propósito</h2>
+    <p>A Rota Caiçara de Cicloturismo é um circuito de aproximadamente 430 km no litoral do Paraná...</p>
+  </section>
+
+  <section>
+    <h2>Cidades da Rota</h2>
+    <div class="cards-grid">
+      <!-- Cards das cidades -->
+      <div class="card">
+        <img src="imagens/Morretes.png" alt="Morretes">
+        <h3>Morretes</h3>
+        <button class="openModal" data-target="modalMorretes">Saiba mais</button>
+      </div>
+      <dialog id="modalMorretes">
+        <button class="close">✖</button>
+        <img src="imagens/Morretes.png" alt="Morretes">
+        <h3>Morretes</h3>
+        <p>Fundada em 1733, Morretes é uma cidade histórica...</p>
+        <audio controls>
+          <source src="audios/SOM TREM.mp3" type="audio/mp3">
+        </audio>
+      </dialog>
+      <!-- Outros cards de cidades aqui -->
+    </div>
+  </section>
+
+  <section>
+    <h2>Conheça os Pontos Turísticos</h2>
+    <div class="cards-grid">
+      <!-- Cards dos pontos turísticos -->
+      <div class="card">
+        <img src="imagens/SaltoMorato.jpg" alt="Salto Morato">
+        <h3>Salto Morato</h3>
+        <button class="openModal" data-target="modalSaltoMorato">Saiba mais</button>
+      </div>
+      <dialog id="modalSaltoMorato">
+        <button class="close">✖</button>
+        <img src="imagens/SaltoMorato.jpg" alt="Salto Morato">
+        <h3>Salto Morato</h3>
+        <p>O Salto Morato é uma das maiores quedas d'água do Paraná...</p>
+        <audio controls>
+          <source src="audios/salto_morato.mp3" type="audio/mp3">
+        </audio>
+      </dialog>
+      <!-- Outros cards de pontos turísticos aqui -->
+    </div>
+  </section>
+
+  <section>
+    <h2>Deixe sua mensagem no Livro de Visitas</h2>
+    <form class="visit-form" action="#" method="post">
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" name="nome" required />
+
+      <label for="email">E-mail:</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="mensagem">Mensagem:</label>
+      <textarea id="mensagem" name="mensagem" rows="4" required></textarea>
+
+      <button type="submit">Enviar</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Museu Virtual</p>
+  </footer>
+
+  <script src="scripts.js"></script>
+</body>
+</html>

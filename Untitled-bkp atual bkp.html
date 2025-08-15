@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rota Caiçara de Cicloturismo</title>
+  <style>
+    /* Estilos base */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url('imagens/Fundo.jpg') center/cover no-repeat fixed;
+    }
+    header {
+      text-align: center;
+      padding: 20px;
+      background: rgba(34, 21, 225, 0.8);
+      color: #fff;
+    }
+    header img { max-width: 150px; height: auto; }
+    .tagline { font-style: italic; color: #ffffff; }
+    section {
+      max-width: 1000px;
+      margin: 40px auto;
+      background: rgba(255,255,255,0.9);
+      border-radius: 8px;
+      padding: 20px;
+      opacity: 110%;
+    }
+    h2 { color: #0a0a0a; }
+
+    /* Rolagem horizontal com scroll-snap */
+    .cards-grid {
+      display: flex;
+      overflow-x: auto;
+      overflow-y: hidden;
+      gap: 20px;
+      padding-bottom: 10px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+    .cards-grid::-webkit-scrollbar {
+      height: 8px;
+    }
+    .cards-grid::-webkit-scrollbar-thumb {
+      background-color: rgba(0,0,0,0.3);
+      border-radius: 4px;
+    }
+    .card {
+      flex: 0 0 250px;
+      scroll-snap-align: start;
+      background: #f9f9f9;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      text-align: center;
+      overflow: hidden;
+      padding-bottom: 15px;
+    }
+    .card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+    .card h3 {
+      margin: 10px 0;
+      font-size: 1.4rem;
+    }
+    .card button {
+      display: block;
+      margin: 5px auto;
+      padding: 0.5rem 1rem;
+      background: #2a5d34;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .card button:hover {
+      background: #0e0f0e;
+    }
+
+    /* Modais responsivos */
+    dialog {
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80vw;
+      max-width: 550px;
+      max-height: 80vh;
+      padding: 1.2rem;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+      display: none;
+      overflow: auto;
+      z-index: 1000;
+    }
+    dialog[open] { display: block; }
+    dialog .close {
+      position: absolute;
+      top: 8px; right: 8px;
+      background: none; border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    dialog img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      border-radius: 6px;
+      margin-bottom: 0.8rem;
+    }
+    dialog h3 {
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
+    }
+    dialog p {
+      font-size: 1rem;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+      text-align: justify;
+    }
+    dialog audio {
+      width: 100%;
+      margin-top: 10px;
+    }
+    @media (max-width: 480px) {
+      dialog {
+        width: 95vw;
+        padding: 0.8rem;
+      }
+    }
+
+    /* Livro de Visitas */
+    .visit-form {
+      margin-top: 30px;
+    }
+    .visit-form label {
+      display: block;
+      margin: 15px 0 5px;
+      font-weight: bold;
+    }
+    .visit-form input,
+    .visit-form textarea {
+      width: 100%;
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+    .visit-form button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      background: #d8d9d8;
+      color: rgb(6, 6, 6);
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .visit-form button:hover {
+      background: #a7b6a7;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: rgba(42, 93, 52, 0.9);
+      color: rgb(13, 13, 13);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="imagens/logo.png" alt="Logo Museu Virtual">
+    <h1>Rota Caiçara de Cicloturismo</h1>
+    <p class="tagline">Pedale pela cultura e natureza do litoral paranaense com propósito.</p>
+  </header>
+
+  <section>
+    <h2>Quem Somos e Nosso Propósito</h2>
+    <p><strong>Pedale por uma jornada de 430 km que une cultura, comunidade e natureza em sete encantadoras cidades do litoral paranaense: Morretes, Antonina, Guaraqueçaba, Paranaguá, Pontal do Paraná, Matinhos e Guaratuba. Idealizada pela UFPR por meio do programa Ciclovida, essa rota promove turismo de base comunitária, conectando história, pertencimento e ciclomobilidade sustentável.</strong></p>
+    <p>A inspiração segue com o Projeto Conecta Caiçara, uma iniciativa que empodera meninas do litoral com interestes em STEM (Ciência, Tecnologia, Engenharia e Matemática). São bolsas que promovem inovadoras experiências, como o desenvolvimento de um Museu Virtual 3D da rota, estações sustentáveis, as cicloparagens e fomento a startups locais colaborativas.</p>
+  <section class="tour-virtual">
+  <h2>Explore a Rota Caiçara em 360°</h2>
+  <p>Vivencie a jornada de 430 km que conecta cultura, comunidade e natureza no litoral paranaense.</p>
+  <div class="video-container">
+    <iframe
+      src="https://www.youtube.com/embed/2fWy2WJLiAs?rel=0&autoplay=1&modestbranding=1"
+      frameborder="0"
+      allow="autoplay; fullscreen; vr"
+      allowfullscreen
+      title="Tour Virtual 360°"
+    ></iframe>
+  </div>
+</section>
+
+<script>
+  function iniciarTour() {
+    const iframe = document.querySelector('iframe');
+    const videoUrl = iframe.src;
+    iframe.src = videoUrl.includes('autoplay=1') ? videoUrl : `${videoUrl}&autoplay=1`;
+  }
+</script>
+
+</div>
+
+<style>
+  /* Estilos específicos para o card do Tour Virtual */
+  .tab-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 600px;
+    background: #165202;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    overflow: hidden;
+    padding-bottom: 15px;
+  }
+
+  .video-container {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* Proporção 16:9 */
+    margin-bottom: 15px;
+  }
+
+  .video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  .card h3 {
+    margin: 10px 0;
+    font-size: 1.4rem;
+    color: #2a5d34;
+  }
+
+  .btn-tour {
+    display: inline-block;
+    padding: 0.8rem 2.5rem;
+    background: #2a5d34;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s;
+  }
+
+  .btn-tour:hover {
+    background: #1b3d1b;
+  }
+
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .card {
+      max-width: 100%;
+      margin: 0 10px;
+    }
+  }
+</style>
+<section class="cultura-caicara">
+  <h2>Cultura Caiçara no Litoral Paranaense</h2>
+  <div class="imagem-cultura">
+    <img src="imagens/cultura.png" alt="Dança de fandango caiçara" style="width:100%; height:auto; border-radius: 8px;">
+  </div>
+  <p>
+    A cultura caiçara do litoral do Paraná é uma tradição viva, forjada pela miscigenação entre povos indígenas, africanos e europeus. As comunidades valorizaram práticas como a pesca artesanal, a agricultura de coivara, o artesanato em palha e madeira, além de manifestações festivas como o fandango — dança musical-coreográfica reconhecida como patrimônio imaterial pelo IPHAN.
+  </p>
+  <p>
+    A vida caiçara é também marcada por festas religiosas, literatura de cordel, auxílio mútuo e fortalecimento comunitário — tradições que atravessam gerações e perpetuam saberes únicos ligados ao mar e à terra .
+  </p>
+</section>
+
+
+</div>
+  </div>
+  </div>
+  <section>
+    <h2>Cidades da Rota</h2>
+    <div class="cards-grid">
+      <!-- Morretes com 3 pontos turísticos -->
+      <div class="card">
+        <img src="imagens/Morretes.png" alt="Morretes">
+        <h3>Morretes</h3>
+        <button class="openModal" data-target="modalMorretes">Saiba mais</button>
+        <button class="openModal" data-target="modalPontoTrem">Passeio de Trem</button>
+        <button class="openModal" data-target="modalPontoMarumbi">Pico do Marumbi</button>
+        <button class="openModal" data-target="modalPontoVeu">Cachoeira Véu de Noiva</button>
+      </div>
+      <dialog id="modalMorretes">
+        <button class="close">✖</button>
+        <img src="imagens/Morretes.png" alt="Morretes">
+        <h3>Morretes</h3>
+        <p>Descubra Morretes sobre duas rodas!
+Pedale por paisagens históricas e naturais únicas, entre morros e o encantador Centro Histórico, até refrescantes pontos à beira do Rio Nhundiaquara. Venha viver cultura, aventura e o famoso barreado em cada pedalada — Morretes espera por você de braços abertos. 🚴‍♂️🌿</p>
+        <audio controls><source src="audios/morretes.mp3" type="audio/mp3"></audio>
+      </dialog>
+      <dialog id="modalPontoTrem">
+        <button class="close">✖</button>
+        <img src="imagens/Trem.jpg" alt="Passeio de Trem">
+        <h3>Passeio de Trem</h3>
+        <p>O famoso passeio de trem entre Curitiba e Morretes, passando pela Mata Atlântica.</p>
+        <audio controls><source src="audios/SOM TREM.mp3" type="audio/mp3"></audio>
+      </dialog>
+      <dialog id="modalPontoMarumbi">
+        <button class="close">✖</button>
+        <img src="imagens/Pico.png" alt="Pico do Marumbi">
+        <h3>Pico do Marumbi</h3>
+        <p>Montanha com trilhas e vistas panorâmicas, ideal para ecoturismo e aventura.</p>
+        <audio controls><source src="audios/SOM FUNDO.mp3" type="audio/mp3"></audio>
+      </dialog>
+      <dialog id="modalPontoVeu">
+        <button class="close">✖</button>
+        <img src="imagens/Veu.png" alt="Cachoeira Véu de Noiva">
+        <h3>Cachoeira Véu de Noiva</h3>
+        <p>Cachoeira com queda d'água impressionante e lago natural para banho.</p>
+        <audio controls><source src="audios/SOM SALTO MORATO.mp3" type="audio/mp3"></audio>
+      </dialog>
+<!-- Antonina com 3 pontos turísticos -->
+      <div class="card">
+        <img src="imagens/Antonina.jpg" alt="Antonina">
+        <h3>Antonina</h3>
+        <button class="openModal" data-target="modalAntonina">Saiba mais</button>
+        <button class="openModal" data-target="modalPontoTrem">Passeio de Trem</button>
+        <button class="openModal" data-target="modalPontoMarumbi">Pico do Marumbi</button>
+        <button class="openModal" data-target="modalPontoVeu">Cachoeira Véu de Noiva</button>
+      </div>
+      <dialog id="modalAntonina">
+        <button class="close">✖</button>
+        <img src="imagens/Antonina.jpg" alt="Antonina">
+        <h3>Antonina</h3>
+        <p>Pedale pela história viva de Antonina, entre casarões coloniais, ruas de paralelepípedos tombadas e a serenidade da Baía de Antonina emoldurada pela Serra do Mar. Sinta a energia dos passeios de barco no trapiche, refresque-se na Prainha e desafie as corredeiras do Rio Cachoeira. Tudo isso com o charme autêntico do Barreado no prato — Antonina te espera com cultura, natureza e aventura de braços abertos!</p>
+        <audio controls><source src="audios/SOM FUNDO.mp3" type="audio/mp3"></audio>
+      </dialog>
+      <dialog id="modalPontadaPita">
+        <button class="close">✖</button>
+        <img src="imagens/ponta.png" alt="Ponta da Pita">
+        <h3>Ponta da Pita</h3>
+        <p>Formação rochosa que avança para dentro da baía de Antonina, situada numa região onde as águas do Oceano Atlântico encontram as encostas da Serra do Mar. É um local de lazer no Bairro Itapema, ideal para banhos, pescarias e piqueniques.</p>
+        <audio controls><source src="audios/SOM TREM.mp3" type="audio/mp3"></audio>
+      </dialog>
+      <dialog id="modalPraça">
+        <button class="close">✖</button>
+        <img src="imagens/Pico.png" alt="Praça Coronel Macedo">
+        <h3>Praça Coronel Macedo</h3>
+        <p>A Praça Coronel Macedo é um dos melhores lugares para relaxar e curtir bons momentos em família em Antonina. Isso porque o espaço é bem arborizado, possui uma extensa área verde e conta com um belo coreto, que é a atração preferida da criançada. Situada no centro, você pode unir o aconchego da praça às comodidades do comércio e, dessa forma, deixar o seu passeio ainda mais agradável.</p>
+        <audio controls><source src="audios/SOM FUNDO.mp3" type="audio/mp3"></audio>
+      </dialog>
+      <dialog id="modalPontoVeu">
+        <button class="close">✖</button>
+        <img src="imagens/Veu.png" alt="Cachoeira Véu de Noiva">
+        <h3>Cachoeira Véu de Noiva</h3>
+        <p>Cachoeira com queda d'água impressionante e lago natural para banho.</p>
+        <audio controls><source src="audios/SOM SALTO MORATO.mp3" type="audio/mp3"></audio>
+      </dialog>
+      <!-- Morretes com 3 pontos turísticos -->
+      <div class="card">
+        <img src="imagens/Morretes.png" alt="Morretes">
+        <h3>Morretes</h3>
+        <button class="openModal" data-target="modalMorretes">Saiba mais</button>
+        <button class="openModal" data-target="modalPontoTrem">Passeio de Trem</button>
+        <button class="openModal" data-target="modalPontoMarumbi">Pico do Marumbi</button>
+        <button class="openModal" data-target="modalPontoVeu">Cachoeira Véu de Noiva</button>
+      </div>
+      <dialog id="modalMorretes">
+        <button class="close">✖</button>
+        <img src="imagens/Morretes.png" alt="Morretes">
+        <h3>Morretes</h3>
+        <p>Descubra Morretes sobre duas rodas!
+Pedale por paisagens históricas e naturais únicas, entre morros e o encantador Centro Histórico, até refrescantes pontos à beira do Rio Nhundiaquara. Venha viver cultura, aventura e o famoso barreado em cada pedalada — Morretes espera por você de braços abertos. 🚴‍♂️🌿</p>
+        <audio controls><source src="audios/morretes.mp3" type="audio/mp3"></audio>
+      </dialog>
+      <dialog id="modalPontoTrem">
+        <button class="close">✖</button>
+        <img src="imagens/Trem.jpg" alt="Passeio de Trem">
+        <h3>Passeio de Trem</h3>
+        <p>O famoso passeio de trem entre Curitiba e Morretes, passando pela Mata Atlântica.</p>
+        <audio controls><source src="audios/SOM TREM.mp3" type="audio/mp3"></audio>
+      </dialog>
+      <dialog id="modalPontoMarumbi">
+        <button class="close">✖</button>
+        <img src="imagens/Pico.png" alt="Pico do Marumbi">
+        <h3>Pico do Marumbi</h3>
+        <p>Montanha com trilhas e vistas panorâmicas, ideal para ecoturismo e aventura.</p>
+        <audio controls><source src="audios/SOM FUNDO.mp3" type="audio/mp3"></audio>
+      </dialog>
+      <dialog id="modalPontoVeu">
+        <button class="close">✖</button>
+        <img src="imagens/Veu.png" alt="Cachoeira Véu de Noiva">
+        <h3>Cachoeira Véu de Noiva</h3>
+        <p>Cachoeira com queda d'água impressionante e lago natural para banho.</p>
+        <audio controls><source src="audios/SOM SALTO MORATO.mp3" type="audio/mp3"></audio>
+      </dialog>
+      <!-- Guaraqueçaba com 3 pontos turísticos -->
+      <div class="card">
+        <img src="imagens/Guaraqueçaba.jpg" alt="Guaraqueçaba">
+        <h3>Guaraqueçaba</h3>
+        <button class="openModal" data-target="modalGuaraquecaba">Saiba mais</button>
+        <button class="openModal" data-target="modalPontoSaltoMorato">Salto Morato</button>
+        <button class="openModal" data-target="modalPontoPorto">Porto</button>
+        <button class="openModal" data-target="modalPontoQuitumbe">Trilha Quitumbê</button>
+      </div>
+      <dialog id="modalGuaraquecaba">
+        <button class="close">✖</button>
+        <img src="imagens/Guaraqueçaba.jpg" alt="Guaraqueçaba">
+        <h3>Guaraqueçaba</h3>
+        <p>Desbrave Guaraqueçaba sobre duas rodas!
+Pedale por trilhas entre mangues, restingas e Mata Atlântica pura, até o imponente Salto Morato e mirantes com vista para baías serenas. Termine o dia com brisa do lago, botos à vista e uma imersão na natureza quase intocada — Guaraqueçaba espera por você..</p>
+        <audio controls><source src="audios/guaraquecaba.mp3" type="audio/mp3"></audio>
+      </dialog>
+      <dialog id="modalPontoSaltoMorato">
+        <button class="close">✖</button>
+        <img src="imagens/SaltoMorato.jpg" alt="Salto Morato">
+        <h3>Salto Morato</h3>
+        <p>Reserva com cachoeira alta, trilhas interpretativas e observação da natureza.</p>
+        <audio controls><source src="audios/salto_morato.mp3" type="audio/mp3"></audio>
+      </dialog>
+      <dialog id="modalPontoPorto">
+        <button class="close">✖</button>
+        <img src="imagens/PortoGuaraquecaba.jpg" alt="Porto">
+        <h3>Porto de Guaraqueçaba</h3>
+        <p>Ponto de chegada por barco, com vista para a baía e vida marinha.</p>
+        <audio controls><source src="audios/porto.mp3" type="audio/mp3"></audio>
+      </dialog>
+      <dialog id="modalPontoQuitumbe">
+        <button class="close">✖</button>
+        <img src="imagens/Quitumbe.jpg" alt="Trilha Quitumbê">
+        <h3>Trilha do Quitumbê</h3>
+        <p>Trilha curta com vista panorâmica da região e contato direto com a mata atlântica.</p>
+        <audio controls><source src="audios/quitumbe.mp3" type="audio/mp3"></audio>
+      </dialog>
+    </div>
+    
+  </section>
+
+  <section>
+    <h2>Deixe sua mensagem no Livro de Visitas</h2>
+    <form class="visit-form">
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" name="nome" required>
+      <label for="email">E-mail:</label>
+      <input type="email" id="email" name="email" required>
+      <label for="mensagem">Mensagem:</label>
+      <textarea id="mensagem" name="mensagem" rows="4" required></textarea>
+      <button type="submit">Enviar</button>
+    </form>
+  </section>
+
+
+<style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    .mural-cicloviajantes {
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .slider {
+      display: flex;
+      overflow-x: auto;
+      gap: 20px;
+      padding-bottom: 20px;
+      scroll-snap-type: x mandatory;
+    }
+
+    .slide {
+      flex: 0 0 auto;
+      width: 300px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-bottom: 2px solid #ddd;
+    }
+
+    .caption {
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .caption h3 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .caption p {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.6;
+      margin-top: 10px;
+      text-align: justify;
+    }
+
+    /* Estilos para dispositivos móveis */
+    @media (max-width: 768px) {
+      .slider {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .slide {
+        width: 90%;
+        margin-bottom: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="mural-cicloviajantes">
+    <h2>Mural dos Cicloviajantes</h2>
+    <div class="slider">
+      <div class="slide">
+        <img src="imagens/muriel.png" alt= Muriel - Paranaguá>
+        <div class="caption">
+          <h3>Muriel - Paranaguá PR</h3>
+          <p>Ciclistas desde 2013, a usuária de bicicleta de Paranaguá integrou a Rota Caiçara em 2025, um projeto de cicloturismo que conecta sete municípios do litoral paranaense. A expedição, iniciada em sua residência, passou por Morretes, Antonina, Guaraqueçaba e outros destinos, promovendo a mobilidade ativa e o turismo sustentável. Durante a jornada, enfrentou desafios como calor intenso e chuvas fortes, mas também vivenciou momentos de integração com outros cicloviajantes e comunidades locais. A experiência reforçou a importância da bicicleta como meio de integração e desenvolvimento sustentável na região.</p>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="imagens/ANDRE.png" alt="André Mariano - Curitiba">
+        <div class="caption">
+          <h3>André Mariano - Curitiba</h3>
+          <p>Participou da primeira rodada de coleta de imagens da Rota Caiçara durante a Cicloviagem Escola. Isso envolveu preparar uma bicicleta com 11 anos de uso, adaptar suporte para câmera 360, bolsas impermeáveis, suportes de água e paralamas — garantindo o equipamento protegido mesmo em trilhas enlameadas.
+
+No primeiro dia (20/02/25), você pedalou 90 km até Morretes após um reparo de pneu, reuniu com outros participantes e enfrentou chuva forte até Antonina. No segundo dia, o trecho até Tagaçaba foi mais desafiador, principalmente por cansaço acumulado e cuidados técnicos para garantir a qualidade das filmagens, mas também trouxe uma parada marcante em uma aldeia Guarani. No terceiro e quarto dias, explorou o Salto Morato (incluindo a piscina natural chamada “aquário”), seguiu até Batuva e visitou a comunidade Quilombola do Rio Verde antes de concluir a jornada em Guaraqueçaba.</p>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="imagens/DHIOGO.png" alt="Dhiogo - Curitiba">
+        <div class="caption">
+ 
+          <h3>Dhiogo - Curitiba</h3>
+          <p>Foram quatro dias intensos de cicloturismo, superando 180 km em terreno desafiador. Ex-corredor, Dhyogo viveu sua primeira grande experiência sobre duas rodas, documentando a Rota Caiçara com imagens 360º. A jornada uniu esforço físico, pesquisa de campo e contato com comunidades tradicionais. Mais que um desafio pessoal, foi uma imersão transformadora sobre como ciência, cultura e inovação podem caminhar juntas pelo desenvolvimento sustentável.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <footer>&copy; 2025 Equipe Conecta Caiçara - I9UFR </footer>
+
+  <script>
+    document.querySelectorAll('.openModal').forEach(btn => {
+      const modal = document.getElementById(btn.dataset.target);
+      btn.onclick = () => modal.showModal();
+      modal.querySelector('.close').onclick = () => modal.close();
+      modal.onclick = e => {
+        const r = modal.getBoundingClientRect();
+        if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) {
+          modal.close();
+        }
+      };
+    });
+  </script>
+<section class="Encontre Hospedagens e Restaurantes">
+  <h2>Encontre Hospedagens e Restaurantes Na Rota Caiçara </h2>
+  <div class="map-responsive" style="overflow:hidden; padding-bottom:56.25%; position:relative; height:0;">
+    <iframe
+      src="https://maps.google.com/maps?q=-25.4744,-48.8345&z=13&output=embed"
+      style="border:0; position:absolute; top:0; left:0; width:100%; height:100%;"
+      allowfullscreen=""
+      loading="lazy">
+    </iframe>
+  </div>
+</section>
+</body>
+</html>
